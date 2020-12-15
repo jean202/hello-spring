@@ -22,6 +22,7 @@ public class MemberController {
                                         // memberService가 스프링 빈으로 등록되어 있지 않기 때문에
                                         // 의존관계를 주입해 준다 : Dependency Injection
         this.memberService = memberService;
+        System.out.println("memberService = " + memberService.getClass());
     }
     @GetMapping("/members/new")
     public String createForm(){
