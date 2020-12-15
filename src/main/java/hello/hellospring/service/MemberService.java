@@ -39,10 +39,23 @@ public class MemberService {
         */
         // Ctrl Alt Shift T : Refactoring과 관련된 단축키가 나온다.
         // extract method : 연결 연결된 표현을 메소드로 만들어 준다.
-        validateDuplicateMember(member); // 중복 회원 검증
 
-        memberRepository.save(member);
-        return member.getId();
+
+        // 시간 측정 로직 추가
+        long start = System.currentTimeMillis();
+
+        try{
+            validateDuplicateMember(member); // 중복 회원 검증
+            memberRepository.save(member);
+            return member.getId();
+
+        }finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs);
+        }
+
+
     }
     // 중복 회원 검증
     private void validateDuplicateMember(Member member) {
